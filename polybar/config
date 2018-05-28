@@ -1,0 +1,723 @@
+;=========================================================;
+;                JScriber's polybar config.               ;
+;=========================================================;
+
+;----------------------------------------------------------
+;			C O L O R S
+;----------------------------------------------------------
+
+[colors]
+peach = #FFCD98
+lime = #CADC79
+salmon = #d97464
+darkgrey = #2e2e2e
+lightgrey = #444444
+alert = #bd2c40
+
+xcolor0 = ${xrdb:color0}
+xcolor1 = ${xrdb:color1}
+xcolor2 = ${xrdb:color2}
+xcolor3 = ${xrdb:color3}
+xcolor4 = ${xrdb:color4}
+xcolor5 = ${xrdb:color5}
+xcolor6 = ${xrdb:color6}
+xcolor7 = ${xrdb:color7}
+xcolor8 = ${xrdb:color8}
+xcolor9 = ${xrdb:color9}
+xcolor10 = ${xrdb:color10}
+xcolor11 = ${xrdb:color11}
+xcolor12 = ${xrdb:color12}
+xcolor13 = ${xrdb:color13}
+xcolor14 = ${xrdb:color14}
+xcolor15 = ${xrdb:color15}
+background = ${xrdb:background}
+foreground = ${xrdb:foreground}
+
+
+;----------------------------------------------------------
+;			G L O B A L
+;----------------------------------------------------------
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/default]
+
+monitor = ${env:MONITOR:eDP-1}
+width = 100%
+height = 19
+;offset-x = 1%
+;offset-y = 1%
+radius = 0
+fixed-center = true
+bottom = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+underline-size = 0
+border-bottom-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 2
+
+
+;----------------------------------------------------------
+;			F O N T S
+;----------------------------------------------------------
+
+
+font-0 = Roboto bold:size=9
+font-1 = FontAwesome:size=10
+font-2 = materialdesignicons-webfont:size=11
+font-3 = siji:pixelsize=9;1
+; Extra symbols: http://fontawesome.io/cheatsheet/
+
+
+;----------------------------------------------------------
+;			T R A Y
+;----------------------------------------------------------
+
+
+tray-position = right
+tray-padding = 3
+tray-transparent = false
+tray-maxsize = 14
+;tray-offset-x = 21%
+tray-foreground = ${colors.xcolor7}
+tray-background = ${colors.background}
+
+wm-restack = i3
+;override-redirect = true
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+
+;----------------------------------------------------------
+;  	    M O D U L E    L A Y O U T S
+;----------------------------------------------------------
+
+
+modules-left = i3 bspwm
+modules-center = date
+modules-right = spotify volume network battery
+
+
+; All modules available in this config file:
+; i3 xwindow tray xkeyboard filesystem mpd backlight cpu 
+; memory network eth date volume battery temperature github 
+; appmenu powermenu info-trash spotify
+
+
+;----------------------------------------------------------
+;		I 3 W M   M O D U L E
+;----------------------------------------------------------
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = true
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 0
+label-mode-foreground = ${colors.xcolor2}
+label-mode-background = ${colors.xcolor7}
+
+label-focused = %index%%icon%
+label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.xcolor3}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+label-unfocused = %index%%icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+label-visible = %index%%icon% 
+label-visible-foreground = ${colors.xcolor3}
+label-visible-background = ${colors.background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+label-urgent = %index%%icon%  
+label-urgent-foreground = ${colors.xcolor3}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+; Note that the label needs to correspond with the i3wm workspace name
+;ws-icon-0=1; 
+;ws-icon-1=2; 
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.xcolor3}
+label-focused-underline= ${colors.xcolor1}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty = %index%
+label-empty-foreground = ${colors.xcolor1}
+label-empty-padding = 3
+
+
+;----------------------------------------------------------
+;	          T E X T    M O D U L E S
+;----------------------------------------------------------
+
+
+[module/pipe]
+type = custom/text
+content = "|"
+content-foreground = ${colors.darkgrey}
+content-background = ${colors.xcolor0}
+content-padding = 1
+
+[module/LeftStripe]
+type = custom/text
+content = ""
+content-foreground = ${colors.xcolor0}
+content-background = ${colors.xcolor1}
+
+[module/arrow1]
+type = custom/text
+content = ""
+content-foreground = ${colors.xcolor1}
+content-background = ${colors.xcolor0}
+
+[module/arrow2]
+type = custom/text
+content = " "
+content-foreground = ${colors.xcolor7}
+content-background = ${colors.xcolor1}
+
+[module/arrow3]
+type = custom/text
+content = " "
+content-foreground = ${colors.xcolor1}
+content-background = ${colors.xcolor7}
+
+[module/RightStripe]
+type = custom/text
+content = ""
+content-foreground = ${colors.xcolor0}
+content-background = ${colors.xcolor1}
+
+[module/RightArrow1]
+type = custom/text
+content = ""
+content-foreground = ${colors.xcolor1}
+content-background = ${colors.xcolor0}
+
+[module/RightArrow2]
+type = custom/text
+content = ""
+content-foreground = ${colors.xcolor7}
+content-background = ${colors.xcolor1}
+
+[module/RightArrow3]
+type = custom/text
+content = ""
+content-foreground = ${colors.xcolor1}
+content-background = ${colors.xcolor7}
+
+[module/MiddleArrowLeft]
+type = custom/text
+content = "◥"
+content-foreground = ${colors.xcolor1}
+content-background = ${colors.xcolor0}
+;◥ ◤◢ ◣
+[module/MiddleArrowRight]
+type = custom/text
+content = "◢"
+content-foreground = ${colors.xcolor0}
+content-background = ${colors.xcolor1}
+
+
+;----------------------------------------------------------
+;		       X W I N D O W
+;---------------------------------------------------------
+
+
+[module/xwindow]
+type = internal/xwindow
+label = "%title%"
+label-maxlen = 35
+
+
+;----------------------------------------------------------
+;		    X K E Y B O A R D
+;----------------------------------------------------------
+
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+label-layout = 
+label-layout-underline = ${colors.background}
+
+label-indicator-padding = 1
+label-indicator-margin = 0
+label-indicator-foreground = ${colors.primary}
+label-indicator-background = ${colors.background}
+label-indicator-underline = ${colors.background}
+
+
+;----------------------------------------------------------
+;		   F I L E S Y S T E M
+;----------------------------------------------------------
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+
+;----------------------------------------------------------
+;			    M P D
+;----------------------------------------------------------
+
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+
+;----------------------------------------------------------
+;		     B A C K L I G H T
+;----------------------------------------------------------
+
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+
+;----------------------------------------------------------
+;			   C P U
+;----------------------------------------------------------
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = transparent
+label = %percentage%%
+
+
+;----------------------------------------------------------
+;			M E M O R Y
+;----------------------------------------------------------
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+label = %percentage_used%%
+
+
+;----------------------------------------------------------
+;	      W I R E L E S S    N E T W O R K
+;----------------------------------------------------------
+
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+udspeed-minwidth = 5
+accumulate-stats = true
+unknown-as-up = true
+
+format-connected = 
+format-disconnected = <label-disconnected>
+
+
+format-packetloss = <label-connected>
+
+label-connected = %essid%
+label-connected-foreground = ${colors.xcolor4}
+
+label-disconnected = 
+label-disconnected-foreground = ${colors.xcolor4}
+
+ramp-signal-0 = ▁
+ramp-signal-1 = ▂
+ramp-signal-2 = ▃
+ramp-signal-3 = ▄
+ramp-signal-4 = ▅
+ramp-signal-5 = ▆
+ramp-signal-6 = ▇
+ramp-signal-7 = █
+
+
+;----------------------------------------------------------
+;   		      E T H E R N E T
+;----------------------------------------------------------
+
+
+[module/eth]
+type = internal/network
+; To test interface: $ ls -1 /sys/class/net/
+interface = enp1s0
+interval = 0.5
+
+label-connected = "%downspeed:8%  %upspeed:8%  "
+label-connected-foreground = ${colors.foreground}
+label-connected-background = ${colors.background}
+label-disconnected = 
+label-disconnected-foreground = ${colors.xcolor4}
+label-disconnected-background = ${colors.xcolor7}
+
+
+;----------------------------------------------------------
+;		     D A T E  &  T I M E
+;----------------------------------------------------------
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = "%d/%m/%Y"
+
+time = %H:%M
+time-alt = %H:%M
+
+format-prefix = 
+format-prefix-foreground = ${colors.xcolor1}
+format-underline = ${colors.background}
+
+label = %date% %time%
+
+
+;----------------------------------------------------------
+;			V O L U M E
+;----------------------------------------------------------
+
+
+[module/volume]
+type = internal/volume
+
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+format-volume = <ramp-volume>  <bar-volume>
+label-volume = %percentage%
+label-volume-foreground = ${colors.xcolor4}
+
+format-muted-prefix = "Son coupé"
+format-muted-foreground = ${colors.xcolor3}
+label-muted = " "
+
+bar-volume-width = 9
+bar-volume-foreground-0 = ${colors.xcolor3}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-foreground = ${colors.xcolor3}
+bar-volume-indicator-font = 3
+bar-volume-fill = ─
+bar-volume-fill-font = 3
+bar-volume-empty = ─
+bar-volume-empty-font = 3
+bar-volume-empty-foreground = ${colors.foreground}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-foreground = ${colors.foreground}
+
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+
+;----------------------------------------------------------
+;			 B A T T E R Y
+;----------------------------------------------------------
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = <label-charging> <animation-charging>
+format-charging-underline = ${colors.background}
+
+format-discharging = <label-discharging> <ramp-capacity>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.xcolor3}
+format-full-underline =  ${colors.xcolor3}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.xcolor3}
+animation-charging-framerate = 750
+
+label-full = 
+label-full-foreground = ${colors.xcolor3}
+
+
+;----------------------------------------------------------
+;		    T E M P E R A T U R E
+;----------------------------------------------------------
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+
+;----------------------------------------------------------
+;		       G I T H U B
+;----------------------------------------------------------
+
+[module/github]
+type = internal/github
+
+format = <label>
+
+; Accessing an access token stored in file
+;token = ${file:/path/to/file/containing/github/access.token}
+; Accessing an access token stored in an environment variable
+token = ${env:GITHUB_ACCESS_TOKEN}
+; Whether empty notifications should be displayed or not
+empty-notifications = false
+
+;    
+; Available tokens:
+;   %notifications% (default)
+; Default: Notifications: %notifications%
+label =  %notifications%
+
+
+
+;----------------------------------------------------------
+;		      P O W E R   M E N U
+;----------------------------------------------------------
+
+[module/powermenu]
+type = custom/menu
+
+;      » 
+label-open = " "
+label-open-font = 6
+label-open-foreground = ${colors.xcolor1}
+label-open-background = ${colors.xcolor0}
+label-close = 
+label-close-foreground = ${colors.xcolor7}
+label-close-background = ${colors.xcolor0}
+label-separator = " "
+label-separator-foreground = ${colors.xcolor1}
+label-separator-background = ${colors.xcolor0}
+
+; lock
+menu-0-0 = "  "
+menu-0-0-exec = bash ~/scripts/lock.sh
+menu-0-0-foreground = ${colors.xcolor7}
+menu-0-0-background = ${colors.xcolor0}
+; sleep
+menu-0-1 = "  "
+menu-0-1-exec = bash ~/scripts/lock.sh && systemctl suspend
+menu-0-1-foreground = ${colors.xcolor7}
+menu-0-1-background = ${colors.xcolor0}
+; logout
+menu-0-2 = "  "
+menu-0-2-exec = pkill x
+menu-0-2-foreground = ${colors.xcolor7}
+menu-0-2-background = ${colors.xcolor0}
+; reboot
+menu-0-3 = "  "
+menu-0-3-exec = systemctl reboot
+menu-0-3-foreground = ${colors.xcolor7}
+menu-0-3-background = ${colors.xcolor0}
+; shutdown
+menu-0-4 = " "
+menu-0-4-exec = systemctl poweroff
+menu-0-4-foreground = ${colors.xcolor7}
+menu-0-4-background = ${colors.xcolor0}
+; end stripe
+menu-0-5 = " "
+menu-0-5-font = 6
+menu-0-5-foreground = ${colors.xcolor1}
+menu-0-5-background = ${colors.xcolor0}
+
+
+;----------------------------------------------------------
+;		       R U N    M E N U
+;----------------------------------------------------------
+
+[module/appmenu]
+type = custom/menu
+
+;       
+label-open = " "
+label-open-font = 6
+label-open-foreground = ${colors.xcolor1}
+label-open-background = ${colors.xcolor0}
+label-close = " "
+label-close-foreground = ${colors.xcolor7}
+label-close-background = ${colors.xcolor0}
+label-separator = " "
+label-separator-foreground = ${colors.xcolor1}
+label-separator-background = ${colors.xcolor0}
+
+;                   
+; terminal
+menu-0-0 = "  "
+menu-0-0-exec = termite &
+menu-0-0-foreground = ${colors.xcolor7}
+menu-0-0-background = ${colors.xcolor0}
+; filemanager
+menu-0-1 = "  "
+menu-0-1-exec = thunar &
+menu-0-1-foreground = ${colors.xcolor7}
+menu-0-1-background = ${colors.xcolor0}
+; browser
+menu-0-2 = "  "
+menu-0-2-exec = firefox &
+menu-0-2-foreground = ${colors.xcolor7}
+menu-0-2-background = ${colors.xcolor0}
+; editor
+menu-0-3 = "  "
+menu-0-3-exec = atom &
+menu-0-3-foreground = ${colors.xcolor7}
+menu-0-3-background = ${colors.xcolor0}
+; chat client
+menu-0-4 = "  "
+menu-0-4-exec = discord &
+menu-0-4-foreground = ${colors.xcolor7}
+menu-0-4-background = ${colors.xcolor0}
+; media player
+menu-0-5 = "  "
+menu-0-5-exec = vlc &
+menu-0-5-foreground = ${colors.xcolor7}
+menu-0-5-background = ${colors.xcolor0}
+; end stripe
+menu-0-6 = " "
+menu-0-6-font = 6
+menu-0-6-foreground = ${colors.xcolor1}
+menu-0-6-background = ${colors.xcolor0}
+
+
+;----------------------------------------------------------
+;		      S E T T I N G S
+;----------------------------------------------------------
+
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+
+;----------------------------------------------------------
+;		      S C R I P T    M O D U L E S
+;    https://github.com/jaagr/polybar/wiki/Module:-script
+;----------------------------------------------------------
+
+
+[module/info-trash]
+type = custom/script
+exec = ~/polybar-scripts/info-trash.sh
+interval = 60
+click-left = ~/polybar-scripts/info-trash.sh --clean
+label = %output% 
+
+[module/spotify]
+type = custom/script
+exec = ~/.config/polybar/spotify.sh %title%
+tail = true
+interval = 2
+label =   %output%
+label-maxlen = 20
+
